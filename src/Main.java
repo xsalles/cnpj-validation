@@ -21,20 +21,24 @@ public class Main {
             sumFirstDigit += (Character.getNumericValue(cnpj.charAt(i)) * sizeFirst[i]);
         }
 
+        firstDigit = sumFirstDigit % 11;
+
+        if (firstDigit < 2) {
+            firstDigit = 0;
+        } else {
+            firstDigit = 11 - firstDigit;
+        }
+
         for (int i = 0; i < 13; i++) {
             sumSecondDigit += Character.getNumericValue(cnpj.charAt(i)) * sizeSecond[i];
         }
 
-        firstDigit = 11 - (sumFirstDigit % 11);
+        secondDigit = sumSecondDigit % 11;
 
-        if (firstDigit >= 10 || firstDigit <= 2) {
-            firstDigit = 0;
-        }
-
-        secondDigit = 11 - (sumSecondDigit % 11);
-
-        if (secondDigit >= 10 || secondDigit <= 2) {
+        if (secondDigit < 2) {
             secondDigit = 0;
+        } else {
+            secondDigit = 11 - secondDigit;
         }
 
         if (firstDigit != Character.getNumericValue(cnpj.charAt(12))
